@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 // Configuration MongoDB
-const mongoUri = "mongodb+srv://SalomonANAGOVO:Barack122021@cluster0.gbiilyl.mongodb.net/EleveInstituteur?retryWrites=true&w=majority";
+const mongoUri = "mongodb+srv://eni_user:eni_user@cluster0.gbiilyl.mongodb.net/EleveInstituteur?retryWrites=true&w=majority";
 
 mongoose.connect(mongoUri, {
   serverSelectionTimeoutMS: 5000
