@@ -6,7 +6,7 @@ const eleveSchema = new mongoose.Schema({
   prenom: { type: String, required: true },
   niveau_etude: { type: String, required: true },
   filiere: { type: String, required: true, enum: ['Primaire', 'Préscolaire'] },
-  // Ajoutez d'autres champs selon vos besoins
+  date_creation: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Eleve', eleveSchema);
