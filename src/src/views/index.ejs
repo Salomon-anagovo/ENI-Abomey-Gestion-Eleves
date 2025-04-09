@@ -7,14 +7,14 @@
   <div class="card-body">
     <h5 class="card-title">Filtrer par filière</h5>
     <div class="btn-group" role="group">
-      <a href="/" class="btn <%= !filiere ? 'btn-primary' : 'btn-outline-primary' %>">Tous</a>
+      <a href="/" class="btn <%= (typeof filiere === 'undefined' || !filiere) ? 'btn-primary' : 'btn-outline-primary' %>">Tous</a>
       <a href="/?filiere=Primaire" class="btn <%= filiere === 'Primaire' ? 'btn-primary' : 'btn-outline-primary' %>">Primaire</a>
       <a href="/?filiere=Préscolaire" class="btn <%= filiere === 'Préscolaire' ? 'btn-primary' : 'btn-outline-primary' %>">Préscolaire</a>
     </div>
   </div>
 </div>
 
-<% if (eleves.length === 0) { %>
+<% if (typeof eleves === 'undefined' || eleves.length === 0) { %>
   <div class="alert alert-info">Aucun élève-instituteur enregistré pour le moment.</div>
 <% } else { %>
   <div class="table-responsive">
@@ -39,14 +39,16 @@
             </td>
             <td><%= eleve.niveau_etude %></td>
             <td>
-              <span class="badge <%= eleve.filiere === 'Primaire' ? 'bg-primary' : 'bg-success' %> filiere-badge">
+              <span class="badge <%= eleve.filiere === 'Primaire' ? 'bg-primary' : 'bg-success' %>">
                 <%= eleve.filiere %>
               </span>
             </td>
-            <td class="table-actions text-end">
+            <td class="text-end">
               <a href="/eleves/modifier/<%= eleve._id %>" class="btn btn-sm btn-warning">Modifier</a>
               <form action="/eleves/supprimer/<%= eleve._id %>" method="POST" class="d-inline">
-                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève-instituteur?')">Supprimer</button>
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève?')">
+                  Supprimer
+                </button>
               </form>
             </td>
           </tr>
