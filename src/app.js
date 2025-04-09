@@ -5,13 +5,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const path = require('path');
 
-// Initialisation de l'application
 const app = express();
 
-// Configuration de la base de données MongoDB
+// 1. Configuration de la base de données
 const mongoUri = process.env.MONGODB_URI;
 if (!mongoUri) {
-  console.error('❌ Erreur : MONGODB_URI non défini dans .env');
+  console.error('❌ Erreur : MONGODB_URI manquant dans .env');
   process.exit(1);
 }
 
@@ -22,14 +21,14 @@ mongoose.connect(mongoUri, {
 .then(() => console.log('✅ Connecté à MongoDB'))
 .catch(err => console.error('❌ Erreur MongoDB:', err));
 
-// Middlewares
+// 2. Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configuration des sessions (production-ready)
+// 3. Configuration des sessions (Production-ready)
 app.use(session({
-  secret: process.env.SESSION_SECRET || require('crypto').randomBytes(32).toString('hex'),
+  secret: process.env.SESSION_SECRET || 'secret_temporaire_dev',
   store: MongoStore.create({
     mongoUrl: mongoUri,
     ttl: 14 * 24 * 60 * 60 // 14 jours
@@ -43,45 +42,32 @@ app.use(session({
   }
 }));
 
-// Configuration des vues EJS
+// 4. Configuration des vues (Chemin corrigé pour Render)
+const viewsPath = path.join(__dirname, 'views');
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', viewsPath);
 
-// Middleware pour les messages flash
-app.use((req, res, next) => {
-  res.locals.message = req.session.message;
-  delete req.session.message;
-  next();
-});
-
-// Routes de base
+// 5. Routes de base
 app.get('/', (req, res) => {
   res.render('index', { 
-    title: 'ENI Abomey - Gestion des élèves',
+    title: 'ENI Abomey - Tableau de bord',
     currentYear: new Date().getFullYear()
   });
 });
 
-// Gestion des erreurs 404
+// 6. Gestion des erreurs
 app.use((req, res) => {
-  res.status(404).render('404', { 
-    title: 'Page non trouvée',
-    currentYear: new Date().getFullYear()
-  });
+  res.status(404).render('404', { title: 'Page non trouvée' });
 });
 
-// Gestion des erreurs serveur
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).render('500', {
-    title: 'Erreur serveur',
-    currentYear: new Date().getFullYear()
-  });
+  res.status(500).render('500', { title: 'Erreur serveur' });
 });
 
-// Démarrage du serveur
+// 7. Démarrage du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
-  console.log(`Environnement: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📁 Chemin des vues : ${viewsPath}`);
 });
