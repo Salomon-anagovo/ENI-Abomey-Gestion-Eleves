@@ -1,0 +1,16 @@
+rm /opt/render/project/src/package.json
+echo '{
+  "name": "eni-abomey-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "engines": {
+    "node": "22.14.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
+  }
+}' > /opt/render/project/src/package.json
