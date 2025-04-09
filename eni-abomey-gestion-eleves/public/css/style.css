@@ -1,0 +1,28 @@
+/* Styles de base */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.filiere-badge {
+  font-size: 0.8rem;
+}
+
+.table-actions {
+  white-space: nowrap;
+}
+
+.student-photo-placeholder {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100px;
+  margin-bottom: 1rem;
+}
