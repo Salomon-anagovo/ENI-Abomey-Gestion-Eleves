@@ -1,0 +1,80 @@
+<h1 class="mb-4">Ajouter un Élève-Instituteur</h1>
+
+<form method="POST">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="matricule_eni" class="form-label">Matricule ENI *</label>
+        <input type="text" class="form-control" id="matricule_eni" name="matricule_eni" 
+               placeholder="ENI-2023-0001" required>
+        <div class="form-text">Format: ENI-ANNEE-XXXX</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="nom" class="form-label">Nom *</label>
+        <input type="text" class="form-control" id="nom" name="nom" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom *</label>
+        <input type="text" class="form-control" id="prenom" name="prenom" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="date_naissance" class="form-label">Date de naissance</label>
+        <input type="date" class="form-control" id="date_naissance" name="date_naissance">
+      </div>
+
+      <div class="mb-3">
+        <label for="lieu_naissance" class="form-label">Lieu de naissance</label>
+        <input type="text" class="form-control" id="lieu_naissance" name="lieu_naissance">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="filiere" class="form-label">Filière *</label>
+        <select class="form-select" id="filiere" name="filiere" required>
+          <option value="">Sélectionnez une filière</option>
+          <option value="Primaire">Primaire</option>
+          <option value="Préscolaire">Préscolaire</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="niveau_etude" class="form-label">Niveau d'étude *</label>
+        <select class="form-select" id="niveau_etude" name="niveau_etude" required>
+          <option value="">Sélectionnez un niveau</option>
+          <option value="Première année">Première année</option>
+          <option value="Deuxième année">Deuxième année</option>
+          <option value="Troisième année">Troisième année</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email">
+      </div>
+
+      <div class="mb-3">
+        <label for="telephone" class="form-label">Téléphone</label>
+        <input type="tel" class="form-control" id="telephone" name="telephone">
+      </div>
+
+      <div class="mb-3">
+        <label for="contact_parent_tuteur" class="form-label">Contact parent/tuteur</label>
+        <input type="text" class="form-control" id="contact_parent_tuteur" name="contact_parent_tuteur">
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="adresse" class="form-label">Adresse</label>
+    <textarea class="form-control" id="adresse" name="adresse" rows="2"></textarea>
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="/" class="btn btn-secondary me-md-2">Annuler</a>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
