@@ -14,10 +14,10 @@ if (!mongoUri) {
   process.exit(1);
 }
 
+// Connexion à MongoDB sans sslValidate
 mongoose.connect(mongoUri, {
-  ssl: true,
-  sslValidate: true,
-  tlsAllowInvalidCertificates: false
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 })
 .then(() => console.log('✅ Connecté à MongoDB'))
 .catch(err => {
