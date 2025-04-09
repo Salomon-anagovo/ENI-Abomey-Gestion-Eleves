@@ -1,25 +1,16 @@
-{
-  "name": "eni-abomey-gestion-eleves",
+rm /opt/render/project/src/package.json
+echo '{
+  "name": "eni-abomey-app",
   "version": "1.0.0",
-  "description": "Application de gestion des élèves-instituteurs de l'ENI d'Abomey",
   "main": "app.js",
-  "scripts": {
-    "start": "node ./src/app.js",
-    "dev": "nodemon ./src/app.js",
-    "install": "cd src && npm install"
-  },
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.3.1",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "express-session": "^1.17.3",
-    "mongoose": "^8.0.3"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  },
   "engines": {
     "node": "22.14.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3"
   }
-}
+}' > /opt/render/project/src/package.json
