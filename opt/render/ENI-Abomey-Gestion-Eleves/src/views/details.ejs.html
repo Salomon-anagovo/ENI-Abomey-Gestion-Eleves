@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Détails de l'Élève-Instituteur</h1>
+  <div>
+    <a href="/eleves/modifier/<%= eleve._id %>" class="btn btn-warning me-2">Modifier</a>
+    <form action="/eleves/supprimer/<%= eleve._id %>" method="POST" class="d-inline">
+      <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève-instituteur?')">Supprimer</button>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-4">
+      <div class="card-body text-center">
+        <div class="mb-3">
+          <span class="student-photo-placeholder d-inline-block bg-light rounded-circle p-5">
+            <i class="bi bi-person-fill fs-1 text-muted"></i>
+          </span>
+        </div>
+        <h3><%= eleve.nom %> <%= eleve.prenom %></h3>
+        <h5 class="text-muted"><%= eleve.matricule_eni %></h5>
+        <span class="badge <%= eleve.filiere === 'Primaire' ? 'bg-primary' : 'bg-success' %>">
+          <%= eleve.filiere %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        Informations personnelles
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Date de naissance:</strong> <%= eleve.date_naissance ? eleve.date_naissance.toLocaleDateString('fr-FR') : 'Non renseignée' %></p>
+            <p><strong>Lieu de naissance:</strong> <%= eleve.lieu_naissance || 'Non renseigné' %></p>
+            <p><strong>Niveau d'étude:</strong> <%= eleve.niveau_etude %></p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Email:</strong> <%= eleve.email || 'Non renseigné' %></p>
+            <p><strong>Téléphone:</strong> <%= eleve.telephone || 'Non renseigné' %></p>
+            <p><strong>Contact parent/tuteur:</strong> <%= eleve.contact_parent_tuteur || 'Non renseigné' %></p>
+          </div>
+        </div>
+        <p><strong>Adresse:</strong> <%= eleve.adresse || 'Non renseignée' %></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header bg-success text-white">
+            Évaluations
+          </div>
+          <div class="card-body">
+            <% if (eleve.evaluations) { %>
+              <p><strong>Contrôle continu:</strong> <%= eleve.evaluations.controle_continu || 'Non noté' %></p>
+              <p><strong>Examen:</strong> <%= eleve.evaluations.examen || 'Non noté' %></p>
+              <p><strong>Stage:</strong> <%= eleve.evaluations.stage || 'Non noté' %></p>
+            <% } else { %>
+              <p>Aucune évaluation enregistrée</p>
+            <% } %>
+            <a href="/evaluations/modifier/<%= eleve._id %>" class="btn btn-sm btn-outline-success">Modifier les évaluations</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+            <span>Stages pédagogiques</span>
+            <a href="/stages/ajouter/<%= eleve._id %>" class="btn btn-sm btn-light">Ajouter un stage</a>
+          </div>
+          <div class="card-body">
+            <% if (eleve.stages && eleve.stages.length > 0) { %>
+              <% eleve.stages.forEach(stage => { %>
+                <div class="mb-3 pb-2 border-bottom">
+                  <p><strong>Établissement:</strong> <%= stage.etablissement %></p>
+                  <p><strong>Période:</strong> 
+                    <%= stage.periode_debut.toLocaleDateString('fr-FR') %> - 
+                    <%= stage.periode_fin.toLocaleDateString('fr-FR') %>
+                  </p>
+                  <p><strong>Tuteur:</strong> <%= stage.tuteur %></p>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <p>Aucun stage enregistré</p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="/" class="btn btn-outline-primary">Retour à la liste</a>
